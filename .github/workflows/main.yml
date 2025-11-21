@@ -1,0 +1,53 @@
+name: Playwright Tests & Allure Report
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    
+    steps:
+    # --- PART A: BASIC CI/CD SETUP ---
+    
+    # 1. Code le kar aao
+    - uses: actions/checkout@v4
+    
+    # 2. Node.js install karo
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 18
+
+    # 3. Dependencies install karo (npm install)
+    - name: Install dependencies
+      run: npm ci
+
+    # 4. Browsers install karo
+    - name: Install Playwright Browsers
+      run: npx playwright install --with-deps
+
+    # 5. Test Run karo
+    - name: Run Playwright tests
+      run: npx playwright test
+      continue-on-error: true 
+      # ^ IMPORT: Agar test fail ho, tab bhi rukna mat, aage badho (taki report ban sake)
+
+    # --- PART B: ALLURE REPORT UPLOAD ---
+
+    # 6. Report Generate karo (Kachra data -> Sundar HTML)
+    - name: Generate Allure Report
+      run: npx allure-commandline generate allure-results --clean -o allure-report
+      if: always() # Ye hamesha chalna chahiye
+
+    # 7. Report Upload karo (Zip bana ke GitHub par rakh do)
+    - name: Upload Allure Report
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: allure-report # Ye naam yaad rakhna, isi naam se zip milegi
+        path: allure-report/
+        retention-days: 30
