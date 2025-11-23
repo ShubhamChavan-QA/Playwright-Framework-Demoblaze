@@ -1,18 +1,25 @@
 import { test, expect } from '@playwright/test';
 import { LoginPage } from '../pages/LoginPage';
 
-test('My first test', async ({ page }) => {
-    //Create new instance for page object
+test('Login Test via Env Variables', async ({ page }) => {
+    
+    // 1. Page Object ka naya instance banao
     const loginPage = new LoginPage(page);
-    //Open website
+
+    // 2. Website kholo (Ye ab .env se URL uthayega, humne Page Object mein fix kiya tha)
     await loginPage.goto();
-    //Perform Login option 
-    await loginPage.login('ShubhamChavan', 'Shubham@1');
-    //Check logout button visible?
+
+    // 3. Credentials .env file se uthao (Tijori se nikaalo) 🔐
+    // Hum '!' laga rahe hain taaki TypeScript ko yakeen dilayein ki ye value null nahi hai
+    const username = process.env.USER_NAME!;
+    const password = process.env.PASSWORD!;
+
+    console.log(`Logging in with user: ${username}`); // Debugging ke liye (Optional)
+
+    // 4. Login perform karo
+    await loginPage.login(username, password);
+
+    // 5. Check karo logout button visible hai ya nahi
     const logoutButton = page.locator('#logout2');
-    //wait for sometime
     await expect(logoutButton).toBeVisible();
-
-
-
-})
+});

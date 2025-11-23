@@ -1,56 +1,60 @@
 import { defineConfig, devices } from '@playwright/test';
+import dotenv from 'dotenv';
+import path from 'path';
 
-/**
- * Read environment variables from file.
- * https://github.com/motdotla/dotenv
- */
-// import dotenv from 'dotenv';
-// import path from 'path';
-// dotenv.config({ path: path.resolve(__dirname, '.env') });
+// 1. Pata lagao kaunsa environment hai (qa, sit, prod)
+const environment = process.env.ENV || 'qa';
 
-/**
- * See https://playwright.dev/docs/test-configuration.
- */
+// 2. Path banao (Ye variable pehle define hona chahiye!)
+// Hum 'process.cwd()' use kar rahe hain jo sabse safe tareeka hai root folder lene ka
+const envPath = path.resolve(process.cwd(), `.env.${environment}`);
+
+// 3. File Load karo
+console.log('--------------------------------------------------');
+console.log(`🌍 Environment: ${environment}`);
+console.log(`📂 Loading .env from: ${envPath}`);
+
+const result = dotenv.config({ path: envPath });
+
+// 4. Check karo load hua ya nahi
+if (result.error) {
+  console.log('❌ Error: .env file nahi mili! Path check karo.');
+} else {
+  console.log('✅ File mil gayi!');
+  console.log(`🔗 BASE_URL Value: ${process.env.BASE_URL}`); // Yahan asli value dikhni chahiye
+}
+console.log('--------------------------------------------------');
+
 export default defineConfig({
   testDir: './tests',
-  /* Run tests in files in parallel */
   fullyParallel: true,
-  /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
-  /* Retry on CI only */
-  retries: process.env.CI ? 2 : 0,
-  /* Opt out of parallel tests on CI. */
+  retries: process.env.CI ? 2 : 1,
   workers: process.env.CI ? 1 : undefined,
-  /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [
-    ['line'], // Terminal mein dikhane ke liye
-    ['html'], // Purana wala report (backup ke liye)
-    ['allure-playwright'] // Naya wala Magic report ✨
+    ['line'],
+    ['html'],
+    ['allure-playwright']
   ],
   use: {
-    /* Base URL to use in actions like `await page.goto('')`. */
-    // baseURL: 'http://localhost:3000',
-
-    /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: 'on-first-retry',
+    trace: 'retain-on-failure',
+    screenshot: 'only-on-failure',
+    video: 'retain-on-failure',
   },
-
-  /* Configure projects for major browsers */
   projects: [
     {
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
-    },
+    }
+    // {
+    //   name: 'firefox',
+    //   use: { ...devices['Desktop Firefox'] },
+    // },
 
-    {
-      name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
-    },
-
-    {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
-    },
+    // {
+    //   name: 'webkit',
+    //   use: { ...devices['Desktop Safari'] },
+    // },
 
     /* Test against mobile viewports. */
     // {

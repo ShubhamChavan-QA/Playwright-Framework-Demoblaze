@@ -3,7 +3,12 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "test:qa": "cross-env ENV=qa npx playwright test",
+    "test:sit": "cross-env ENV=sit npx playwright test",
+    "test:prod": "cross-env ENV=prod npx playwright test",
+    "report": "npx playwright show-report"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -12,6 +17,8 @@
     "@playwright/test": "^1.56.1",
     "@types/node": "^24.10.1",
     "allure-commandline": "^2.34.1",
-    "allure-playwright": "^3.4.2"
+    "allure-playwright": "^3.4.2",
+    "cross-env": "^10.1.0",
+    "dotenv": "^17.2.3"
   }
 }

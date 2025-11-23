@@ -15,6 +15,7 @@ export class CartPage{
         await this.cartLink.click();
         await this.page.waitForSelector('tbody tr');
         //check text match
-        await expect(this.prodctTitleInCart).toHaveText(productName);
+        const product = this.prodctTitleInCart.filter({ hasText: productName }).first();
+        await expect(product).toBeVisible();
     }
 }

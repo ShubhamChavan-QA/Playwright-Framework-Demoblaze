@@ -32,9 +32,24 @@ jobs:
 
     # 5. Test Run karo
     - name: Run Playwright tests
+      # Yahan hum Secrets ko khol kar process.env mein daal rahe hain
+      env:
+        # Hum bata rahe hain ki 'qa' environment maano
+        ENV: qa  
+        # Code dhoondega process.env.BASE_URL, hum use Secret de rahe hain
+        BASE_URL: ${{ secrets.BASE_URL }}
+        USER_NAME: ${{ secrets.USER_NAME }}
+        PASSWORD: ${{ secrets.PASSWORD }}
+      
+      # NOTE: Hum 'npm run test:qa' use karenge
+      run: npm run test:qa
+      continue-on-error: true name: Run Playwright tests
+      # Yahan hum Secrets ko Environment variables mein convert kar rahe hain
+      env:
+        DEMO_USERNAME: ${{ secrets.DEMO_USERNAME }}
+        DEMO_PASSWORD: ${{ secrets.DEMO_PASSWORD }}
       run: npx playwright test
-      continue-on-error: true 
-      # ^ IMPORT: Agar test fail ho, tab bhi rukna mat, aage badho (taki report ban sake)
+      continue-on-error: true
 
     # --- PART B: ALLURE REPORT UPLOAD ---
 
