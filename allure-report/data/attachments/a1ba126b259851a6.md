@@ -1,0 +1,96 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - text:            X 
+  - navigation [ref=e2]:
+    - generic [ref=e3]:
+      - link "PRODUCT STORE" [ref=e4]:
+        - /url: index.html
+        - img [ref=e5]
+        - text: PRODUCT STORE
+      - list [ref=e7]:
+        - listitem [ref=e8]:
+          - link "Home (current)" [ref=e9]:
+            - /url: index.html
+            - text: Home
+            - generic [ref=e10]: (current)
+        - listitem [ref=e11]:
+          - link "Contact" [ref=e12]:
+            - /url: "#"
+        - listitem [ref=e13]:
+          - link "About us" [ref=e14]:
+            - /url: "#"
+        - listitem [ref=e15]:
+          - link "Cart" [ref=e16]:
+            - /url: "#"
+        - listitem
+        - listitem [ref=e17]:
+          - link "Log out" [ref=e18]:
+            - /url: "#"
+        - listitem [ref=e19]:
+          - link "Welcome ShubhamChavan" [ref=e20]:
+            - /url: "#"
+        - listitem
+  - generic [ref=e22]:
+    - generic [ref=e23]:
+      - heading "Products" [level=2] [ref=e24]
+      - table [ref=e26]:
+        - rowgroup [ref=e27]:
+          - row "Pic Title Price x" [ref=e28]:
+            - cell "Pic" [ref=e29]
+            - cell "Title" [ref=e30]
+            - cell "Price" [ref=e31]
+            - cell "x" [ref=e32]
+        - rowgroup [ref=e33]:
+          - row "Samsung galaxy s6 360 Delete" [ref=e34]:
+            - cell [ref=e35]:
+              - img [ref=e36]
+            - cell "Samsung galaxy s6" [ref=e37]
+            - cell "360" [ref=e38]
+            - cell "Delete" [ref=e39]:
+              - link "Delete" [ref=e40]:
+                - /url: "#"
+          - row "Samsung galaxy s6 360 Delete" [ref=e41]:
+            - cell [ref=e42]:
+              - img [ref=e43]
+            - cell "Samsung galaxy s6" [ref=e44]
+            - cell "360" [ref=e45]
+            - cell "Delete" [ref=e46]:
+              - link "Delete" [ref=e47]:
+                - /url: "#"
+          - row "Samsung galaxy s6 360 Delete" [ref=e48]:
+            - cell [ref=e49]:
+              - img [ref=e50]
+            - cell "Samsung galaxy s6" [ref=e51]
+            - cell "360" [ref=e52]
+            - cell "Delete" [ref=e53]:
+              - link "Delete" [ref=e54]:
+                - /url: "#"
+          - row "Samsung galaxy s6 360 Delete" [ref=e55]:
+            - cell [ref=e56]:
+              - img [ref=e57]
+            - cell "Samsung galaxy s6" [ref=e58]
+            - cell "360" [ref=e59]
+            - cell "Delete" [ref=e60]:
+              - link "Delete" [ref=e61]:
+                - /url: "#"
+    - generic [ref=e62]:
+      - heading "Total" [level=2] [ref=e63]
+      - heading "1440" [level=3] [ref=e66]
+      - button "Place Order" [ref=e67]
+  - generic [ref=e69]:
+    - generic [ref=e72]:
+      - heading "About Us" [level=4] [ref=e73]
+      - paragraph [ref=e74]: We believe performance needs to be validated at every stage of the software development cycle and our open source compatible, massively scalable platform makes that a reality.
+    - generic [ref=e77]:
+      - heading "Get in Touch" [level=4] [ref=e78]
+      - paragraph [ref=e79]: "Address: 2390 El Camino Real"
+      - paragraph [ref=e80]: "Phone: +440 123456"
+      - paragraph [ref=e81]: "Email: demo@blazemeter.com"
+    - heading "PRODUCT STORE" [level=4] [ref=e85]:
+      - img [ref=e86]
+      - text: PRODUCT STORE
+  - contentinfo [ref=e87]:
+    - paragraph [ref=e88]: Copyright © Product Store
+```
