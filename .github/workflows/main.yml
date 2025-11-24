@@ -67,7 +67,6 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_branch: gh-pages
         publish_dir: allure-history
-
     # 4. Summary mein Link dikhao (Pass/Fail Status)
     - name: Post Report Link
       if: always()
